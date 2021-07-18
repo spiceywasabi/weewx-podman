@@ -1,0 +1,88 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2021-07-17T18:34:06Z"
+  labels:
+    app: weewx
+  name: weewx
+spec:
+  containers:
+  - name: station-tempest
+    image: localhost/weewx:latest  
+    args:
+    - /data/weewx.conf
+    command:
+    - ./entrypoint.sh
+    env:
+    - name: WEEWX_VERSION
+      value: 4.4.0
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: true
+      capabilities:
+        add:
+        - CAP_NET_RAW
+        drop:
+        - CAP_MKNOD
+        - CAP_AUDIT_WRITE
+      privileged: false
+      readOnlyRootFilesystem: false
+      seLinuxOptions: {}
+    volumeMounts:
+    - mountPath: /data
+      name: weewx-tempest-data
+    - mountPath: /www
+      name: weewx-tempest-www
+    workingDir: /home/weewx
+  - name: station-vantage
+    image: localhost/weewx:latest  
+    args:
+    - /data/weewx.conf
+    command:
+    - ./entrypoint.sh
+    env:
+    - name: WEEWX_HOME
+      value: /home/weewx
+    - name: WEEWX_VERSION
+      value: 4.4.0
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: true
+      capabilities:
+        drop:
+        - CAP_MKNOD
+        - CAP_AUDIT_WRITE
+      privileged: true
+      readOnlyRootFilesystem: false
+      seLinuxOptions: {}
+    volumeMounts:
+    - mountPath: /data
+      name: weewx-vantage-data
+    - mountPath: /www
+      name: weewx-vantage-www
+    - mountPath: /dev/ttyUSB0
+      name: usbserial0
+    workingDir: /home/weewx
+  dnsConfig: {}
+  hostNetwork: true
+  volumes:
+  - hostPath:
+      path: /opt/weewx/tempest/data
+      type: Directory
+    name: weewx-tempest-data
+  - hostPath:
+      path: /opt/weewx/vantage/data
+      type: Directory
+    name: weewx-vantage-data
+  - hostPath:
+      path: /opt/weewx/tempest/www
+      type: Directory
+    name: weewx-tempest-www
+  - hostPath:
+      path: /opt/weewx/vantage/www
+      type: Directory
+    name: weewx-vantage-wwww
+  - hostPath:
+      path: /dev/ttyUSB0
+    name: usbserial0
+status: {}
