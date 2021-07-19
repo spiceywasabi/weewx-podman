@@ -8,20 +8,17 @@ metadata:
 spec:
   containers:
   - name: station-tempest
-    image: localhost/weewx:latest  
-    args:
-    - /data/weewx.conf
-    command:
-    - ./entrypoint.sh
+    image: localhost/weewx-podman:latest
     env:
-    - name: WEEWX_VERSION
-      value: 4.4.0
+    - name: TZ
+      value: America/Los_Angeles
     resources: {}
     securityContext:
       allowPrivilegeEscalation: true
       capabilities:
         add:
         - CAP_NET_RAW
+        - SYS_TIME
         drop:
         - CAP_MKNOD
         - CAP_AUDIT_WRITE
@@ -33,18 +30,11 @@ spec:
       name: weewx-tempest-data
     - mountPath: /www
       name: weewx-tempest-www
-    workingDir: /home/weewx
   - name: station-vantage
-    image: localhost/weewx:latest  
-    args:
-    - /data/weewx.conf
-    command:
-    - ./entrypoint.sh
+    image: localhost/weewx-podman:latest
     env:
-    - name: WEEWX_HOME
-      value: /home/weewx
-    - name: WEEWX_VERSION
-      value: 4.4.0
+    - name: TZ
+      value: America/Los_Angeles
     resources: {}
     securityContext:
       allowPrivilegeEscalation: true
@@ -62,7 +52,6 @@ spec:
       name: weewx-vantage-www
     - mountPath: /dev/ttyUSB0
       name: usbserial0
-    workingDir: /home/weewx
   dnsConfig: {}
   hostNetwork: true
   volumes:
@@ -81,7 +70,7 @@ spec:
   - hostPath:
       path: /opt/weewx/vantage/www
       type: Directory
-    name: weewx-vantage-wwww
+    name: weewx-vantage-www
   - hostPath:
       path: /dev/ttyUSB0
     name: usbserial0
