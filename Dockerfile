@@ -7,7 +7,7 @@ LABEL org.opencontainers.image.authors="wasabi@dc562.org"
 LABEL org.opencontainers.image.vendor="wasabi"
 
 RUN apt-get update && apt-get install -y libusb-1.0-0 gosu busybox-syslogd tzdata unzip \
- zip sudo mariadb-client python3-mysqldb sqlite3 sqlite python3-pip bash wget rsync \
+ zip sudo mariadb-client python3-mysqldb sqlite3 python3-pip bash wget rsync \
  && pip3 install pyephem paho-mqtt configobj requests
 
 COPY ./wee*.txt /
