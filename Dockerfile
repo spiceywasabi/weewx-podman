@@ -1,8 +1,10 @@
 FROM debian:stable-slim
 
+LABEL org.opencontainers.image.source=https://github.com/spiceywasabi/weewx-container
+LABEL org.opencontainers.image.title=WeeWxContainer
+LABEL org.opencontainers.image.url=https://github.com/spiceywasabi/weewx-container
 LABEL org.opencontainers.image.authors="wasabi@dc562.org"
 LABEL org.opencontainers.image.vendor="wasabi"
-LABEL com.weewx.version=${WEEWX_VERSION}
 
 RUN apt-get update && apt-get install -y libusb-1.0-0 gosu busybox-syslogd tzdata unzip \
  zip sudo mariadb-client python3-mysqldb sqlite3 sqlite python3-pip bash wget rsync
