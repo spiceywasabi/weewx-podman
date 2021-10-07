@@ -6,11 +6,10 @@ LABEL org.opencontainers.image.url=https://github.com/spiceywasabi/weewx-contain
 LABEL org.opencontainers.image.authors="wasabi@dc562.org"
 LABEL org.opencontainers.image.vendor="wasabi"
 
-RUN apt-get update && apt-get install -y libusb-1.0-0 gosu busybox-syslogd tzdata unzip \
- zip sudo mariadb-client python3-mysqldb sqlite3 python3-pip bash wget rsync \
+RUN apt-get update \
+ apt-get install -y libusb-1.0-0 tzdata mariadb-client python3-mysqldb sqlite3 \
+ && apt-get -y --no-install-recommends install gosu python3-pip bash wget rsync gnupg sudo zip unzip sudo busybox-syslogd \
  && pip3 install pyephem paho-mqtt configobj requests
-# build essentials is required because python3-pip is required, which adds extra weight
-# at some point hopefully pyephem and mqtt are available in apt
 
 COPY ./wee*.txt /
 COPY ./scripts/*.sh /

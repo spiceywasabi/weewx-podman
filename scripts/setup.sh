@@ -37,3 +37,7 @@ if [ -f "${wanted_extensions_file}" ]; then
 	# remove what we can, never fail
 	rm -fv "/tmp/*.zip" || exit 0
 fi
+apt-get clean
+apt-get autoclean
+apt-get autoremove
+
