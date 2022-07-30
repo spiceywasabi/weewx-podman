@@ -2,8 +2,7 @@ https://github.com/matthewwall/weewx-mqtt/archive/master.zip
 https://github.com/matthewwall/weewx-owm/archive/master.zip
 https://github.com/chaunceygardiner/weewx-forecast/archive/refs/tags/v3.4.0b11.zip
 https://github.com/neoground/neowx-material/releases/download/1.11/neowx-material-1.11.zip
-#https://github.com/captain-coredump/weatherflow-udp/archive/refs/heads/master.zip
-https://github.com/jjvdgeer/weatherflow-udp/releases/download/1.13/weatherflow-udp-1.13.zip
+https://github.com/jjvdgeer/weatherflow-udp/archive/refs/heads/master.zip
 https://github.com/brewster76/fuzzy-archer/archive/refs/heads/master.zip
 https://github.com/poblabs/weewx-belchertown/archive/refs/tags/weewx-belchertown-1.2.zip
 
