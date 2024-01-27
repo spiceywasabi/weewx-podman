@@ -5,7 +5,7 @@ LABEL org.opencontainers.image.title=WeeWxContainer
 LABEL org.opencontainers.image.url=https://github.com/spiceywasabi/weewx-container
 LABEL org.opencontainers.image.authors="wasabi@dc562.org"
 LABEL org.opencontainers.image.vendor="wasabi"
-LABEL version="4.10.2"
+LABEL version="5.0.0"
 
 RUN apt-get update \
  && apt-get install -y libusb-1.0-0 tzdata mariadb-client python3-mysqldb sqlite3 \
