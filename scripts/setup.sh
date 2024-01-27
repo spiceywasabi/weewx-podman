@@ -3,9 +3,11 @@
 set -o nounset
 set -o errexit
 set -o pipefail
-	
-wget -qO - https://weewx.com/keys.html | sudo apt-key add -
-wget -qO - https://weewx.com/apt/weewx-python3.list | sudo tee /etc/apt/sources.list.d/weewx.list
+
+apt-get -y install wget gnupg
+wget -qO - https://weewx.com/keys.html | sudo gpg --dearmor --output /etc/apt/trusted.gpg.d/weewx.gpg
+echo "deb [arch=all] https://weewx.com/apt/python3 buster main" | sudo tee /etc/apt/sources.list.d/weewx.list
+
 apt-get -y update
 mkdir -p /etc/weewx
 #touch /etc/weewx/weewx.conf
