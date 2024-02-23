@@ -26,7 +26,7 @@ if [ -f "${wanted_extensions_file}" ]; then
 		echo "wanting to download url ${extension} to destination ${filename}..."
 		wget -O "${filename}" "${extension}"
 		if [ -f ${filename} ]; then
-			wee_extension --install "${filename}"
+			weectl extension install -y "${filename}"
 			if [ "$?" -ne 0 ]; then
 				exit 1
 			fi
