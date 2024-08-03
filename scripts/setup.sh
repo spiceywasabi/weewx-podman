@@ -13,6 +13,21 @@ mkdir -p /etc/weewx
 #touch /etc/weewx/weewx.conf
 DEBIAN_FRONTEND=noninteractive apt-get -y install weewx  --assume-yes
 
+# Before we begin we must setup logging....
+
+cat <<EOF >> /etc/weewx/weewx.conf
+
+[Logging]
+    [[root]]
+        handlers = timed_rotate,
+    [[handlers]]
+        [[[timed_rotate]]]
+            level = ERROR
+            formatter = verbose
+            class = logging.StreamHandler
+            stream = ext://sys.stdout
+
+EOF
 
 wanted_extensions_file="wee-wanted-extensions.txt"
 if [ -f "${wanted_extensions_file}" ]; then
